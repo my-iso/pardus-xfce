@@ -13,9 +13,9 @@ chroot chroot apt-get install xserver-xorg network-manager-gnome -y
 
 chroot chroot apt-get install pardus-xfce-desktop sudo thunar-archive-plugin pardus-installer-y
 echo "deb http://depo.pardus.org.tr/pardus ondokuz main contrib non-free" > chroot/etc/apt/sources.list
-echo "deb http://depo.pardus.org.tr/guvenlik ondokuz main contrib non-free" > chroot/etc/apt/sources.list
+echo "deb http://depo.pardus.org.tr/guvenlik ondokuz main contrib non-free" >> chroot/etc/apt/sources.list
 chroot chroot apt-get update 
-chroot chroot apt-get install firmware-amd-graphics firmware-atheros \
+chroot chroot apt-get install -y firmware-amd-graphics firmware-atheros \
     firmware-b43-installer firmware-b43legacy-installer \
     firmware-bnx2 firmware-bnx2x firmware-brcm80211  \
     firmware-cavium firmware-intel-sound firmware-intelwimax \
