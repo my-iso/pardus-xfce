@@ -1,32 +1,27 @@
 #!/usr/bin/sh
 
 mkdir chroot
-debootstrap --no-merged-usr --arch=amd64 sid chroot https://deb.debian.org/debian
+debootstrap --no-merged-usr --arch=i386 ondokuz chroot https://19.depo.pardus.org.tr/pardus
 for i in dev dev/pts proc sys; do mount -o bind /$i chroot/$i; done
 chroot chroot apt-get install gnupg -y
 
-# Debjaro repository
-echo "deb https://debjaro.github.io/repo/stable stable main" > chroot/etc/apt/sources.list.d/debjaro.list
-curl https://debjaro.github.io/repo/stable/dists/stable/Release.key | chroot chroot apt-key add -
-chroot chroot apt-get update -y
-chroot chroot apt-get upgrade -y
-
-chroot chroot apt-get dist-upgrade -y
 chroot chroot apt-get install grub-pc-bin grub-efi -y
 chroot chroot apt-get install live-config live-boot -y
-
-# liquorix kernel
-curl https://liquorix.net/add-liquorix-repo.sh | chroot chroot bash
-chroot chroot apt-get install linux-image-liquorix-amd64 linux-headers-liquorix-amd64 -y
 
 # xorg & desktop pkgs
 chroot chroot apt-get install xserver-xorg network-manager-gnome -y
 
-# Install lxde-gtk3
-echo "deb https://raw.githubusercontent.com/lxde-gtk3/binary-packages/master stable main" > chroot/etc/apt/sources.list.d/lxde-gtk3.list
-curl https://raw.githubusercontent.com/lxde-gtk3/binary-packages/master/dists/stable/Release.key | chroot chroot apt-key add -
-chroot chroot apt-get update
-chroot chroot apt-get install lxde-core -y
+chroot chroot apt-get install pardus-xfce-desktop sudo thunar-archive-plugin pardus-installer-y
+
+chroot chroot apt-get install firmware-amd-graphics firmware-atheros \
+    firmware-b43-installer firmware-b43legacy-installer \
+    firmware-bnx2 firmware-bnx2x firmware-brcm80211  \
+    firmware-cavium firmware-intel-sound firmware-intelwimax \
+    firmware-ipw2x00 firmware-ivtv firmware-iwlwifi \
+    firmware-libertas firmware-linux firmware-linux-free \
+    firmware-linux-nonfree firmware-misc-nonfree firmware-myricom \
+    firmware-netxen firmware-qlogic firmware-realtek firmware-samsung \
+    firmware-siano firmware-ti-connectivity firmware-zd1211
 
 chroot chroot apt-get clean
 rm -f chroot/root/.bash_history
@@ -43,7 +38,7 @@ cp -pf chroot/boot/initrd.img-* debjaro/live/initrd.img
 cp -pf chroot/boot/vmlinuz-* debjaro/live/vmlinuz
 
 mkdir -p debjaro/boot/grub/
-echo 'menuentry "Start Debjaro GNU/Linux 64-bit" --class debjaro {' > debjaro/boot/grub/grub.cfg
+echo 'menuentry "Start Pardus GNU/Linux XFCE 32-bit (Unofficial)" --class pardus {' > debjaro/boot/grub/grub.cfg
 echo '    linux /live/vmlinuz boot=live live-config live-media-path=/live quiet splash --' >> debjaro/boot/grub/grub.cfg
 echo '    initrd /live/initrd.img' >> debjaro/boot/grub/grub.cfg
 echo '}' >> debjaro/boot/grub/grub.cfg
