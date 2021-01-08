@@ -3,6 +3,7 @@
 mkdir chroot
 debootstrap --no-merged-usr --arch=i386 ondokuz chroot https://19.depo.pardus.org.tr/pardus
 for i in dev dev/pts proc sys; do mount -o bind /$i chroot/$i; done
+chroot chroot apt-get update -y
 chroot chroot apt-get install gnupg -y
 
 chroot chroot apt-get install grub-pc-bin grub-efi-ia32 -y
@@ -11,7 +12,8 @@ chroot chroot apt-get install live-config live-boot linux-image-686-pae -y
 # xorg & desktop pkgs
 chroot chroot apt-get install xserver-xorg network-manager-gnome -y
 
-chroot chroot apt-get install xfce4 pardus-xfce-settings sudo thunar-archive-plugin -y
+chroot chroot apt-get install xfce4 pardus-xfce-settings sudo thunar-archive-plugin xfce4-whiskermenu-plugin firefox-esrxfce4-terminal mousepad -y
+
 echo "deb http://depo.pardus.org.tr/pardus ondokuz main contrib non-free" > chroot/etc/apt/sources.list
 echo "deb http://depo.pardus.org.tr/guvenlik ondokuz main contrib non-free" >> chroot/etc/apt/sources.list
 chroot chroot apt-get update -y
