@@ -11,7 +11,7 @@ chroot chroot apt-get install live-config live-boot -y
 # xorg & desktop pkgs
 chroot chroot apt-get install xserver-xorg network-manager-gnome -y
 
-chroot chroot apt-get install pardus-xfce-desktop sudo thunar-archive-plugin pardus-installer-y
+chroot chroot apt-get install xfce4 pardus-xfce-settings sudo thunar-archive-plugin-y
 echo "deb http://depo.pardus.org.tr/pardus ondokuz main contrib non-free" > chroot/etc/apt/sources.list
 echo "deb http://depo.pardus.org.tr/guvenlik ondokuz main contrib non-free" >> chroot/etc/apt/sources.list
 chroot chroot apt-get update 
