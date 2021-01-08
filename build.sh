@@ -5,8 +5,8 @@ debootstrap --no-merged-usr --arch=i386 ondokuz chroot https://19.depo.pardus.or
 for i in dev dev/pts proc sys; do mount -o bind /$i chroot/$i; done
 chroot chroot apt-get install gnupg -y
 
-chroot chroot apt-get install grub-pc-bin grub-efi -y
-chroot chroot apt-get install live-config live-boot -y
+chroot chroot apt-get install grub-pc-bin grub-efi-ia32 -y
+chroot chroot apt-get install live-config live-boot linux-image-686-pae -y
 
 # xorg & desktop pkgs
 chroot chroot apt-get install xserver-xorg network-manager-gnome -y
