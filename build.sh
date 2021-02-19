@@ -12,7 +12,7 @@ chroot chroot apt-get install live-config live-boot linux-image-686-pae -y
 # xorg & desktop pkgs
 chroot chroot apt-get install xserver-xorg network-manager-gnome -y
 
-chroot chroot apt-get install xfce4 pardus-xfce-settings sudo thunar-archive-plugin xfce4-whiskermenu-plugin firefox-esrxfce4-terminal mousepad -y
+chroot chroot apt-get install xfce4 pardus-xfce-settings sudo thunar-archive-plugin xfce4-whiskermenu-plugin firefox-esr xfce4-terminal mousepad -y
 
 echo "deb http://depo.pardus.org.tr/pardus ondokuz main contrib non-free" > chroot/etc/apt/sources.list
 echo "deb http://depo.pardus.org.tr/guvenlik ondokuz main contrib non-free" >> chroot/etc/apt/sources.list
