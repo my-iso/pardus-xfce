@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 
 mkdir chroot
-debootstrap --no-merged-usr --arch=i386 ondokuz chroot https://19.depo.pardus.org.tr/pardus
+debootstrap --no-merged-usr --arch=i386 yirmibir chroot https://depo.pardus.org.tr/pardus
 for i in dev dev/pts proc sys; do mount -o bind /$i chroot/$i; done
 chroot chroot apt-get update -y
 chroot chroot apt-get install gnupg -y
