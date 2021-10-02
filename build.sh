@@ -1,7 +1,8 @@
 #!/usr/bin/sh
-
-mkdir chroot
-debootstrap --no-merged-usr --arch=i386 yirmibir chroot https://depo.pardus.org.tr/pardus
+set -ex
+mkdir chroot || true
+ln -s sid /usr/share/debootstrap/scripts/yirmibir || true
+debootstrap  --no-check-gpg --no-merged-usr --arch=i386 yirmibir chroot https://depo.pardus.org.tr/pardus
 for i in dev dev/pts proc sys; do mount -o bind /$i chroot/$i; done
 chroot chroot apt-get update -y
 chroot chroot apt-get install gnupg -y
@@ -16,6 +17,8 @@ chroot chroot apt-get install xfce4 pardus-xfce-settings sudo thunar-archive-plu
 
 echo "deb http://depo.pardus.org.tr/pardus ondokuz main contrib non-free" > chroot/etc/apt/sources.list
 echo "deb http://depo.pardus.org.tr/guvenlik ondokuz main contrib non-free" >> chroot/etc/apt/sources.list
+echo "deb http://depo.pardus.org.tr/pardus yirmibir main contrib non-free" > chroot/etc/apt/sources.list
+echo "deb http://depo.pardus.org.tr/guvenlik yirmibir main contrib non-free" >> chroot/etc/apt/sources.list
 chroot chroot apt-get update -y
 chroot chroot apt-get install -y firmware-amd-graphics firmware-atheros \
     firmware-b43-installer firmware-b43legacy-installer \
@@ -32,7 +35,7 @@ rm -f chroot/root/.bash_history
 rm -rf chroot/var/lib/apt/lists/*
 find chroot/var/log/ -type f | xargs rm -f
 
-mkdir pardus
+mkdir pardus || true
 umount -lf -R chroot/* 2>/dev/null
 mksquashfs chroot filesystem.squashfs -comp gzip -wildcards
 mkdir -p pardus/live
