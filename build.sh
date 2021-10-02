@@ -14,6 +14,7 @@ chroot chroot apt-get install live-config live-boot linux-image-686-pae -y
 chroot chroot apt-get install xserver-xorg network-manager-gnome -y
 
 chroot chroot apt-get install xfce4 pardus-xfce-settings sudo thunar-archive-plugin xfce4-whiskermenu-plugin firefox-esr xfce4-terminal mousepad -y
+chroot chroot apt-get install pardus-instaler pardus-gtk-theme pardus-dolunay-icon-theme pardus-dolunay-grub-theme -y
 
 echo "deb http://depo.pardus.org.tr/pardus ondokuz main contrib non-free" > chroot/etc/apt/sources.list
 echo "deb http://depo.pardus.org.tr/guvenlik ondokuz main contrib non-free" >> chroot/etc/apt/sources.list
@@ -40,6 +41,7 @@ while umount -lf -R chroot/* 2>/dev/null ; do
  : "Umount action"
 done
 mksquashfs chroot filesystem.squashfs -comp gzip -wildcards
+find chroot/var/log/ -type f | xargs rm -f
 mkdir -p pardus/live
 mv filesystem.squashfs pardus/live/filesystem.squashfs
 
