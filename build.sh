@@ -36,7 +36,9 @@ rm -rf chroot/var/lib/apt/lists/*
 find chroot/var/log/ -type f | xargs rm -f
 
 mkdir pardus || true
-umount -lf -R chroot/* 2>/dev/null
+while umount -lf -R chroot/* 2>/dev/null ; do
+ : "Umount action"
+done
 mksquashfs chroot filesystem.squashfs -comp gzip -wildcards
 mkdir -p pardus/live
 mv filesystem.squashfs pardus/live/filesystem.squashfs
