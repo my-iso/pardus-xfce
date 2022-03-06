@@ -44,10 +44,9 @@ echo "deb http://depo.pardus.org.tr/guvenlik yirmibir main contrib non-free" >> 
 chroot chroot apt-get update -y
 chroot chroot apt-get install -y firmware-amd-graphics firmware-atheros \
     firmware-b43-installer firmware-b43legacy-installer \
-    firmware-bnx2 firmware-bnx2x firmware-brcm80211  \
+    firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-linux-free \
     firmware-cavium firmware-intel-sound firmware-intelwimax \
-    firmware-ipw2x00 firmware-ivtv firmware-iwlwifi \
-    firmware-libertas firmware-linux firmware-linux-free \
+    firmware-iwlwifi  firmware-libertas firmware-linux \
     firmware-linux-nonfree firmware-misc-nonfree firmware-myricom \
     firmware-netxen firmware-qlogic firmware-realtek firmware-samsung \
     firmware-siano firmware-ti-connectivity firmware-zd1211
