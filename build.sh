@@ -11,17 +11,10 @@ chroot chroot apt-get install gnupg -y
 chroot chroot apt-get install grub-pc-bin grub-efi-ia32 -y
 chroot chroot apt-get install live-config live-boot linux-image-686-pae -y
 
-#### Configure system
-cat > chroot/etc/apt/apt.conf.d/01norecommend << EOF
-APT::Install-Recommends "0";
-APT::Install-Suggests "0";
-EOF
-
 # xorg & desktop pkgs
-chroot chroot apt-get install xserver-xorg network-manager-gnome -y
-
+chroot chroot apt-get install xserver-xorg xinit lightdm lightdm-gtk-greeter network-manager-gnome pulseaudio -y
 chroot chroot apt-get install xfce4 pardus-xfce-settings sudo thunar-archive-plugin xfce4-whiskermenu-plugin firefox-esr xfce4-terminal mousepad -y
-chroot chroot apt-get install pardus-gtk-theme pardus-dolunay-icon-theme pardus-dolunay-grub-theme -y
+chroot chroot apt-get install pardus-gtk-theme pardus-icon-theme pardus-dolunay-grub-theme -y
 
 wget -O chroot/tmp/17g.deb https://github.com/PuffOS/17g-installer/releases/download/current/17g-installer_1.0_all.deb
 chroot chroot dpkg -i /tmp/17g.deb || true
@@ -70,7 +63,7 @@ cp -pf chroot/boot/vmlinuz-* pardus/live/vmlinuz
 
 mkdir -p pardus/boot/grub/
 echo 'menuentry "Start Pardus GNU/Linux XFCE 32-bit (Unofficial)" --class pardus {' > pardus/boot/grub/grub.cfg
-echo '    linux /live/vmlinuz boot=live components timezone=Europe/Istanbul locales=tr_TR.UTF-8,en_US.UTF-8 keyboard-layouts=tr username=pardus hostname=pardus user-fullname=Pardus vga=791 noswap splash quiet --' >> pardus/boot/grub/grub.cfg
+echo '    linux /live/vmlinuz boot=live components timezone=Europe/Istanbul locales=tr_TR.UTF-8,en_US.UTF-8 keyboard-layouts=tr username=pardus hostname=pardus user-fullname=Pardus noswap splash quiet --' >> pardus/boot/grub/grub.cfg
 echo '    initrd /live/initrd.img' >> pardus/boot/grub/grub.cfg
 echo '}' >> pardus/boot/grub/grub.cfg
 
