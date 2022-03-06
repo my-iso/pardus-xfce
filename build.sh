@@ -24,7 +24,7 @@ chroot chroot apt-get install xfce4 pardus-xfce-settings sudo thunar-archive-plu
 chroot chroot apt-get install pardus-gtk-theme pardus-dolunay-icon-theme pardus-dolunay-grub-theme -y
 
 wget -O chroot/tmp/17g.deb https://github.com/PuffOS/17g-installer/releases/download/current/17g-installer_1.0_all.deb
-chroot chroot dpkg -i /tmp/17g.deb
+chroot chroot dpkg -i /tmp/17g.deb || true
 chroot chroot apt install -f -y
 
 #### Remove bloat files after dpkg invoke (optional)
@@ -71,7 +71,7 @@ cp -pf chroot/boot/vmlinuz-* pardus/live/vmlinuz
 
 mkdir -p pardus/boot/grub/
 echo 'menuentry "Start Pardus GNU/Linux XFCE 32-bit (Unofficial)" --class pardus {' > pardus/boot/grub/grub.cfg
-echo '    linux /live/vmlinuz boot=live live-config live-media-path=/live quiet splash --' >> pardus/boot/grub/grub.cfg
+echo '    linux /live/vmlinuz boot=live components timezone=Europe/Istanbul locales=tr_TR.UTF-8,en_US.UTF-8 keyboard-layouts=tr username=pardus hostname=pardus user-fullname=Pardus vga=791 noswap splash quiet --' >> pardus/boot/grub/grub.cfg
 echo '    initrd /live/initrd.img' >> pardus/boot/grub/grub.cfg
 echo '}' >> pardus/boot/grub/grub.cfg
 
