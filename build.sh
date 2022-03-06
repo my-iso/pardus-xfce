@@ -20,8 +20,12 @@ EOF
 # xorg & desktop pkgs
 chroot chroot apt-get install xserver-xorg network-manager-gnome -y
 
-yes | chroot chroot apt-get install xfce4 pardus-xfce-settings sudo thunar-archive-plugin xfce4-whiskermenu-plugin firefox-esr xfce4-terminal mousepad -y
-yes | chroot chroot apt-get install pardus-instaler pardus-gtk-theme pardus-dolunay-icon-theme pardus-dolunay-grub-theme -y
+chroot chroot apt-get install xfce4 pardus-xfce-settings sudo thunar-archive-plugin xfce4-whiskermenu-plugin firefox-esr xfce4-terminal mousepad -y
+chroot chroot apt-get install pardus-gtk-theme pardus-dolunay-icon-theme pardus-dolunay-grub-theme -y
+
+wget -O chroot/tmp/17g.deb https://github.com/PuffOS/17g-installer/releases/download/current/17g-installer_1.0_all.deb
+chroot chroot dpkg -i /tmp/17g.deb
+chroot chroot apt install -f -y
 
 #### Remove bloat files after dpkg invoke (optional)
 cat > chroot/etc/apt/apt.conf.d/02antibloat << EOF
