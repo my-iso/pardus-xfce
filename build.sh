@@ -11,20 +11,24 @@ chroot chroot apt-get install gnupg -y
 chroot chroot apt-get install grub-pc-bin grub-efi-ia32 -y
 chroot chroot apt-get install live-config live-boot linux-image-686-pae -y
 
-cat > /etc/apt/sources.list.d/devuan.list << EOF
+echo -e "#!/bin/sh\nexit 101" > chroot/usr/sbin/policy-rc.d
+chmod +x chroot/usr/sbin/policy-rc.d
+
+cat > chroot/etc/apt/sources.list.d/devuan.list << EOF
 deb http://deb.devuan.org/merged stable main
 deb http://deb.devuan.org/merged stable-updates main
 deb http://deb.devuan.org/merged stable-security main
 deb http://deb.devuan.org/merged stable-backports main
 EOF
-rm -f /var/lib/dpkg/info/systemd.prerm
-apt-mark hold desktop-base # Do not replace theme
-apt-get update --allow-insecure-repositories
-apt-get install devuan-keyring --allow-unauthenticated -y
-apt-get update
-apt install elogind eudev sysvinit-core sysv-rc ntp -y --allow-remove-essential -y
-apt-get full-upgrade -y
-apt-get autoremove --purge -y
+
+rm -f chroot/var/lib/dpkg/info/systemd.prerm
+chroot chroot apt-mark hold desktop-base # Do not replace theme
+chroot chroot apt-get update --allow-insecure-repositories
+chroot chroot apt-get install devuan-keyring --allow-unauthenticated -y
+chroot chroot apt-get update
+chroot chroot apt install elogind eudev sysvinit-core sysv-rc ntp -y --allow-remove-essential -y
+chroot chroot apt-get full-upgrade -y
+chroot chroot apt-get autoremove --purge -y
 
 # xorg & desktop pkgs
 chroot chroot apt-get install xserver-xorg xinit lightdm lightdm-gtk-greeter network-manager-gnome pulseaudio -y
