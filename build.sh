@@ -9,7 +9,7 @@ chroot chroot apt-get update -y
 chroot chroot apt-get install gnupg -y
 
 chroot chroot apt-get install grub-pc-bin grub-efi-ia32 -y
-chroot chroot apt-get install live-config live-boot linux-image-686-pae -y
+chroot chroot apt-get install live-config live-boot -y
 
 echo -e "#!/bin/sh\nexit 101" > chroot/usr/sbin/policy-rc.d
 chmod +x chroot/usr/sbin/policy-rc.d
@@ -54,6 +54,7 @@ echo "deb http://depo.pardus.org.tr/guvenlik ondokuz main contrib non-free" >> c
 echo "deb http://depo.pardus.org.tr/pardus yirmibir main contrib non-free" > chroot/etc/apt/sources.list
 echo "deb http://depo.pardus.org.tr/guvenlik yirmibir main contrib non-free" >> chroot/etc/apt/sources.list
 chroot chroot apt-get update -y
+chroot chroot apt-get install linux-image-686-pae -y
 chroot chroot apt-get install -y firmware-amd-graphics firmware-atheros \
     firmware-b43-installer firmware-b43legacy-installer \
     firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-linux-free \
