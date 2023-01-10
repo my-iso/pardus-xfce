@@ -31,7 +31,7 @@ chroot chroot apt-get full-upgrade -y
 chroot chroot apt-get autoremove --purge -y
 
 # xorg & desktop pkgs
-chroot chroot apt-get install xserver-xorg xinit lightdm lightdm-gtk-greeter network-manager-gnome pulseaudio -y
+chroot chroot apt-get install xserver-xorg xinit lightdm pardus-lightdm-greeter network-manager-gnome pulseaudio -y
 chroot chroot apt-get install xfce4 pardus-xfce-settings sudo thunar-archive-plugin xfce4-whiskermenu-plugin firefox-esr xfce4-terminal mousepad -y
 chroot chroot apt-get install pardus-gtk-theme pardus-icon-theme pardus-dolunay-grub-theme -y
 
