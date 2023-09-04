@@ -32,7 +32,6 @@ deb http://deb.devuan.org/merged stable-backports main
 EOF
 
 rm -f chroot/var/lib/dpkg/info/systemd.prerm
-chroot chroot apt-mark hold desktop-base # Do not replace theme
 chroot chroot apt-get update --allow-insecure-repositories
 chroot chroot apt-get install devuan-keyring --allow-unauthenticated -y
 chroot chroot apt-get update
