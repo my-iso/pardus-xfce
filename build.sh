@@ -9,8 +9,8 @@ for i in dev dev/pts proc sys; do mount -o bind /$i chroot/$i; done
 cat > chroot/etc/apt/sources.list.d/pardus.list << EOF
 deb http://depo.pardus.org.tr/pardus yirmibir main contrib non-free
 deb http://depo.pardus.org.tr/guvenlik yirmibir main contrib non-free
-deb http://depo.pardus.org.tr/pardus yirmiuc main contrib non-free
-#deb http://depo.pardus.org.tr/guvenlik yirmiuc main contrib non-free
+deb http://depo.pardus.org.tr/pardus yirmiuc main contrib non-free non-free-firmware
+#deb http://depo.pardus.org.tr/guvenlik yirmiuc main contrib non-free non-free-firmware
 EOF
 chroot chroot apt-get update --allow-insecure-repositories
 chroot chroot apt-get install pardus-archive-keyring --allow-unauthenticated -y
@@ -25,10 +25,10 @@ echo -e "#!/bin/sh\nexit 101" > chroot/usr/sbin/policy-rc.d
 chmod +x chroot/usr/sbin/policy-rc.d
 
 cat > chroot/etc/apt/sources.list.d/devuan.list << EOF
-deb http://deb.devuan.org/merged stable main
-deb http://deb.devuan.org/merged stable-updates main
-deb http://deb.devuan.org/merged stable-security main
-deb http://deb.devuan.org/merged stable-backports main
+deb http://deb.devuan.org/merged stable main contrib non-free non-free-firmware
+deb http://deb.devuan.org/merged stable-updates main contrib non-free non-free-firmware
+deb http://deb.devuan.org/merged stable-security main contrib non-free non-free-firmware
+deb http://deb.devuan.org/merged stable-backports main contrib non-free non-free-firmware
 EOF
 
 rm -f chroot/var/lib/dpkg/info/systemd.prerm
