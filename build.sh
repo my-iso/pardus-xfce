@@ -2,9 +2,19 @@
 set -ex
 mkdir chroot || true
 export DEBIAN_FRONTEND=noninteractive
-ln -s sid /usr/share/debootstrap/scripts/yirmibir || true
-debootstrap  --no-check-gpg --no-merged-usr --arch=i386 yirmibir chroot https://depo.pardus.org.tr/pardus
+ln -s sid /usr/share/debootstrap/scripts/yirmiuc-deb || true
+debootstrap  --no-check-gpg --no-merged-usr --arch=i386 yirmiuc-deb chroot https://depo.pardus.org.tr/pardus
 for i in dev dev/pts proc sys; do mount -o bind /$i chroot/$i; done
+
+cat > chroot/etc/apt/sources.list.d/pardus.list << EOF
+deb http://depo.pardus.org.tr/pardus yirmibir main contrib non-free
+deb http://depo.pardus.org.tr/guvenlik yirmibir main contrib non-free
+deb http://depo.pardus.org.tr/pardus yirmiuc main contrib non-free
+deb http://depo.pardus.org.tr/guvenlik yirmiuc main contrib non-free
+EOF
+chroot chroot apt-get update --allow-insecure-repositories
+chroot chroot apt-get install pardus-archive-keyring --allow-unauthenticated -y
+
 chroot chroot apt-get update -y
 chroot chroot apt-get install gnupg -y
 
@@ -48,11 +58,6 @@ DPkg::Post-Invoke {"rm -rf /usr/share/doc || true";};
 DPkg::Post-Invoke {"rm -rf /usr/share/info || true";};
 EOF
 
-
-echo "deb http://depo.pardus.org.tr/pardus ondokuz main contrib non-free" > chroot/etc/apt/sources.list
-echo "deb http://depo.pardus.org.tr/guvenlik ondokuz main contrib non-free" >> chroot/etc/apt/sources.list
-echo "deb http://depo.pardus.org.tr/pardus yirmibir main contrib non-free" > chroot/etc/apt/sources.list
-echo "deb http://depo.pardus.org.tr/guvenlik yirmibir main contrib non-free" >> chroot/etc/apt/sources.list
 chroot chroot apt-get update -y
 chroot chroot apt-get install linux-image-686-pae -y
 chroot chroot apt-get install -y firmware-amd-graphics firmware-atheros \
