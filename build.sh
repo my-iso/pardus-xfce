@@ -10,7 +10,7 @@ cat > chroot/etc/apt/sources.list.d/pardus.list << EOF
 deb http://depo.pardus.org.tr/pardus yirmibir main contrib non-free
 deb http://depo.pardus.org.tr/guvenlik yirmibir main contrib non-free
 deb http://depo.pardus.org.tr/pardus yirmiuc main contrib non-free
-deb http://depo.pardus.org.tr/guvenlik yirmiuc main contrib non-free
+#deb http://depo.pardus.org.tr/guvenlik yirmiuc main contrib non-free
 EOF
 chroot chroot apt-get update --allow-insecure-repositories
 chroot chroot apt-get install pardus-archive-keyring --allow-unauthenticated -y
