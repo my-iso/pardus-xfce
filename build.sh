@@ -25,20 +25,20 @@ chroot chroot apt-get install live-config live-boot -y
 echo -e "#!/bin/sh\nexit 101" > chroot/usr/sbin/policy-rc.d
 chmod +x chroot/usr/sbin/policy-rc.d
 
-cat > chroot/etc/apt/sources.list.d/devuan.list << EOF
-deb http://deb.devuan.org/merged stable main contrib non-free non-free-firmware
-deb http://deb.devuan.org/merged stable-updates main contrib non-free non-free-firmware
-deb http://deb.devuan.org/merged stable-security main contrib non-free non-free-firmware
-deb http://deb.devuan.org/merged stable-backports main contrib non-free non-free-firmware
-EOF
+#cat > chroot/etc/apt/sources.list.d/devuan.list << EOF
+#deb http://deb.devuan.org/merged stable main contrib non-free non-free-firmware
+#deb http://deb.devuan.org/merged stable-updates main contrib non-free non-free-firmware
+#deb http://deb.devuan.org/merged stable-security main contrib non-free non-free-firmware
+#deb http://deb.devuan.org/merged stable-backports main contrib non-free non-free-firmware
+#EOF
 
-rm -f chroot/var/lib/dpkg/info/systemd.prerm
-chroot chroot apt-get update --allow-insecure-repositories
-chroot chroot apt-get install devuan-keyring --allow-unauthenticated -y
-chroot chroot apt-get update
-chroot chroot apt install elogind eudev sysvinit-core sysv-rc ntp -y --allow-remove-essential -y
-chroot chroot apt-get full-upgrade -y
-chroot chroot apt-get autoremove --purge -y
+#rm -f chroot/var/lib/dpkg/info/systemd.prerm
+#chroot chroot apt-get update --allow-insecure-repositories
+#chroot chroot apt-get install devuan-keyring --allow-unauthenticated -y
+#chroot chroot apt-get update
+#chroot chroot apt install elogind eudev sysvinit-core sysv-rc ntp -y --allow-remove-essential -y
+#chroot chroot apt-get full-upgrade -y
+#chroot chroot apt-get autoremove --purge -y
 
 # xorg & desktop pkgs
 chroot chroot apt-get install xserver-xorg xinit lightdm pardus-lightdm-greeter network-manager-gnome pulseaudio -y
