@@ -10,6 +10,7 @@ cat > chroot/etc/apt/sources.list.d/pardus.list << EOF
 deb http://depo.pardus.org.tr/pardus yirmibir main contrib non-free
 deb http://depo.pardus.org.tr/guvenlik yirmibir main contrib non-free
 deb http://depo.pardus.org.tr/pardus yirmiuc main contrib non-free non-free-firmware
+deb http://depo.pardus.org.tr/pardus yirmiuc-deb main contrib non-free non-free-firmware
 #deb http://depo.pardus.org.tr/guvenlik yirmiuc main contrib non-free non-free-firmware
 EOF
 chroot chroot apt-get update --allow-insecure-repositories
