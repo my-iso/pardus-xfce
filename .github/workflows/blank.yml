@@ -18,7 +18,7 @@ jobs:
           sudo apt install curl mtools squashfs-tools grub-pc-bin grub-efi xorriso debootstrap -y
           sudo bash build.sh
           sudo mkdir -p /output
-          sudo mv *.iso /output/pardus-21.x-32bit.iso
+          sudo mv *.iso /output/pardus-23.x-32bit.iso
 
 
       - uses: "marvinpinto/action-automatic-releases@latest"
@@ -26,7 +26,7 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "main"
           prerelease: false
-          title: "21.x stable"
+          title: "23.x stable"
           files: |
             /output/*
 
