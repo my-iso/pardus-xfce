@@ -41,7 +41,7 @@ chmod +x chroot/usr/sbin/policy-rc.d
 #chroot chroot apt-get autoremove --purge -y
 
 # xorg & desktop pkgs
-chroot chroot apt-get install lsb_release pavucontrol xserver-xorg pipewire xinit lightdm pardus-lightdm-greeter network-manager-gnome -y
+chroot chroot apt-get install lsb-release pavucontrol xserver-xorg pipewire xinit lightdm pardus-lightdm-greeter network-manager-gnome -y
 chroot chroot apt-get install pardus-installer -y
 chroot chroot apt-get install lxde lxde-core --no-install-recommends -y
 
@@ -87,7 +87,8 @@ cp -pf chroot/boot/initrd.img-* pardus/live/initrd.img
 cp -pf chroot/boot/vmlinuz-* pardus/live/vmlinuz
 
 mkdir -p pardus/boot/grub/
-echo 'menuentry "Start Pardus GNU/Linux LXDE 32-bit (Unofficial)" --class pardus {' > pardus/boot/grub/grub.cfg
+echo 'terminal_output console' > pardus/boot/grub/grub.cfg
+echo 'menuentry "Start Pardus GNU/Linux LXDE 32-bit (Unofficial)" --class pardus {' >> pardus/boot/grub/grub.cfg
 echo '    linux /live/vmlinuz boot=live components --' >> pardus/boot/grub/grub.cfg
 echo '    initrd /live/initrd.img' >> pardus/boot/grub/grub.cfg
 echo '}' >> pardus/boot/grub/grub.cfg
