@@ -20,7 +20,7 @@ chroot chroot apt-get update -y
 chroot chroot apt-get install gnupg -y
 
 chroot chroot apt-get install grub-pc-bin grub-efi-ia32 -y
-chroot chroot apt-get install live-config live-boot -y
+chroot chroot apt-get install live-config live-boot plymouth plymouth-themes -y
 
 echo -e "#!/bin/sh\nexit 101" > chroot/usr/sbin/policy-rc.d
 chmod +x chroot/usr/sbin/policy-rc.d
