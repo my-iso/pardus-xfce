@@ -41,12 +41,13 @@ chmod +x chroot/usr/sbin/policy-rc.d
 #chroot chroot apt-get autoremove --purge -y
 
 # xorg & desktop pkgs
-chroot chroot apt-get install xserver-xorg xinit lightdm pardus-lightdm-greeter network-manager-gnome -y
-chroot chroot apt-get install lxde lxde-core pipewire -y
+chroot chroot apt-get install lsb_release pavucontrol xserver-xorg pipewire xinit lightdm pardus-lightdm-greeter network-manager-gnome -y
+chroot chroot apt-get install pardus-installer -y
+chroot chroot apt-get install lxde lxde-core --no-install-recommends -y
 
-wget -O chroot/tmp/17g.deb https://github.com/PuffOS/17g-installer/releases/download/current/17g-installer_1.0_all.deb
-chroot chroot dpkg -i /tmp/17g.deb || true
-chroot chroot apt install -f -y
+#wget -O chroot/tmp/17g.deb https://github.com/PuffOS/17g-installer/releases/download/current/17g-installer_1.0_all.deb
+#chroot chroot dpkg -i /tmp/17g.deb || true
+#chroot chroot apt install -f -y
 
 #### Remove bloat files after dpkg invoke (optional)
 cat > chroot/etc/apt/apt.conf.d/02antibloat << EOF
@@ -87,7 +88,7 @@ cp -pf chroot/boot/vmlinuz-* pardus/live/vmlinuz
 
 mkdir -p pardus/boot/grub/
 echo 'menuentry "Start Pardus GNU/Linux LXDE 32-bit (Unofficial)" --class pardus {' > pardus/boot/grub/grub.cfg
-echo '    linux /live/vmlinuz boot=live components timezone=Europe/Istanbul locales=tr_TR.UTF-8,en_US.UTF-8 keyboard-layouts=tr username=pardus hostname=pardus user-fullname=Pardus noswap quiet --' >> pardus/boot/grub/grub.cfg
+echo '    linux /live/vmlinuz boot=live components --' >> pardus/boot/grub/grub.cfg
 echo '    initrd /live/initrd.img' >> pardus/boot/grub/grub.cfg
 echo '}' >> pardus/boot/grub/grub.cfg
 
