@@ -3,7 +3,7 @@ set -ex
 mkdir chroot || true
 export DEBIAN_FRONTEND=noninteractive
 ln -s sid /usr/share/debootstrap/scripts/yirmiuc-deb || true
-debootstrap  --no-check-gpg --no-merged-usr --arch=x86_64 yirmiuc-deb chroot http://depo.pardus.org.tr/pardus
+debootstrap  --no-check-gpg --arch=amd64 yirmiuc-deb chroot http://depo.pardus.org.tr/pardus
 for i in dev dev/pts proc sys; do mount -o bind /$i chroot/$i; done
 
 cat > chroot/etc/apt/sources.list.d/pardus.list << EOF
