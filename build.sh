@@ -11,6 +11,7 @@ deb http://depo.pardus.org.tr/pardus yirmiuc main contrib non-free non-free-firm
 deb http://depo.pardus.org.tr/pardus yirmiuc-deb main contrib non-free non-free-firmware
 #deb http://depo.pardus.org.tr/guvenlik yirmiuc main contrib non-free non-free-firmware
 EOF
+
 chroot chroot apt-get update --allow-insecure-repositories
 chroot chroot apt-get install pardus-archive-keyring --allow-unauthenticated -y
 
@@ -26,7 +27,7 @@ chmod +x chroot/usr/sbin/policy-rc.d
 # xorg & desktop pkgs
 chroot chroot apt-get install lsb-release pavucontrol xserver-xorg pipewire xinit lightdm pardus-lightdm-greeter network-manager-gnome -y
 chroot chroot apt-get install pardus-installer -y
-chroot chroot apt-get install cinnamon --no-install-recommends -y
+chroot chroot apt-get install cinnamon -y
 
 
 #### Remove bloat files after dpkg invoke (optional)
