@@ -14,10 +14,6 @@ EOF
 chroot chroot apt-get update --allow-insecure-repositories
 chroot chroot apt-get install pardus-archive-keyring --allow-unauthenticated -y
 
-cat > chroot/etc/apt/sources.list.d/yirmiuc-backports.list << EOF
-deb http://depo.pardus.org.tr/backports yirmiuc-backports main contrib non-free non-free-firmware
-EOF
-
 chroot chroot apt-get update -y
 chroot chroot apt-get install gnupg -y
 
@@ -43,8 +39,8 @@ DPkg::Post-Invoke {"rm -rf /usr/share/info || true";};
 EOF
 
 chroot chroot apt-get update -y
-chroot chroot apt-get install -t yirmiuc-backports linux-image-amd64 -y
-chroot chroot apt-get install -t yirmiuc-backports -y firmware-amd-graphics firmware-atheros \
+chroot chroot apt-get install linux-image-amd64 -y
+chroot chroot apt-get install -y firmware-amd-graphics firmware-atheros \
     firmware-b43-installer firmware-b43legacy-installer \
     firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-linux-free \
     firmware-cavium firmware-intel-sound firmware-intelwimax \
