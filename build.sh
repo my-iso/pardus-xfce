@@ -16,26 +16,26 @@ cat > chroot/etc/apt/sources.list.d/yirmiuc-backports.list << EOF
 deb http://depo.pardus.org.tr/backports yirmiuc-backports main contrib non-free non-free-firmware
 EOF
 
-
 chroot chroot apt-get update --allow-insecure-repositories
 chroot chroot apt-get install pardus-archive-keyring --allow-unauthenticated -y
 
 chroot chroot apt-get update -y
 
-chroot chroot apt-get install gnupg grub-pc-bin grub-efi-ia32-bin grub-efi -y
-chroot chroot apt-get install live-config live-boot plymouth plymouth-themes -y
+chroot chroot apt-get install gnupg grub-pc-bin grub-efi-ia32-bin grub-efi live-config live-boot plymouth plymouth-themes -y
 
 echo -e "#!/bin/sh\nexit 101" > chroot/usr/sbin/policy-rc.d
 chmod +x chroot/usr/sbin/policy-rc.d
 
 chroot chroot apt-get install -t yirmiuc-backports linux-image-amd64 -y
-chroot chroot apt-get install -y firmware-amd-graphics firmware-linux-free \
-    firmware-linux firmware-linux-nonfree firmware-misc-nonfree firmware-realtek \
+chroot chroot apt-get install firmware-amd-graphics firmware-linux-free firmware-linux firmware-linux-nonfree firmware-misc-nonfree firmware-realtek \
     
-# xorg & desktop pkgs
-chroot chroot apt-get install xserver-xorg xinit lightdm gedit gnome-terminal eog network-manager-gnome synaptic p7zip-full gvfs-backends wget xdg-user-dirs -y
+chroot chroot apt-get install xserver-xorg xinit lightdm -y
+chroot chroot apt-get install gedit gnome-terminal gnome-system-monitor gnome-calculator gnome-weather gnome-calendar eog network-manager-gnome synaptic p7zip-full gvfs-backends wget xdg-user-dirs -y
 chroot chroot apt-get install pardus-lightdm-greeter pardus-installer pardus-software pardus-package-installer pardus-night-light pardus-about pardus-update pardus-locales pardus-ayyildiz-grub-theme -y
 chroot chroot apt-get install cinnamon papirus-icon-theme orchis-gtk-theme -y
+
+chroot chroot update-grub
+chroot chroot apt-get upgrade -y
 
 
 #### Remove bloat files after dpkg invoke (optional)
