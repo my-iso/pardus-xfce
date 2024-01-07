@@ -1,5 +1,6 @@
 #!/usr/bin/sh
 set -ex
+apt install debootstrap xorriso squashfs-tools mtools grub-pc-bin grub-efi-amd64 -y
 mkdir chroot || true
 export DEBIAN_FRONTEND=noninteractive
 ln -s sid /usr/share/debootstrap/scripts/yirmiuc-deb || true
@@ -26,14 +27,23 @@ chroot chroot apt-get install gnupg grub-pc-bin grub-efi-ia32-bin grub-efi live-
 echo -e "#!/bin/sh\nexit 101" > chroot/usr/sbin/policy-rc.d
 chmod +x chroot/usr/sbin/policy-rc.d
 
+#Kernel
 chroot chroot apt-get install -t yirmiuc-backports linux-image-amd64 -y
-chroot chroot apt-get install firmware-amd-graphics firmware-linux-free firmware-linux firmware-linux-nonfree firmware-misc-nonfree firmware-realtek \
-    
-chroot chroot apt-get install xserver-xorg xinit lightdm -y
-chroot chroot apt-get install gedit gnome-terminal gnome-system-monitor gnome-calculator gnome-weather gnome-calendar eog network-manager-gnome synaptic p7zip-full gvfs-backends wget xdg-user-dirs -y
-chroot chroot apt-get install pardus-lightdm-greeter pardus-installer pardus-software pardus-package-installer pardus-night-light pardus-about pardus-update pardus-locales pardus-ayyildiz-grub-theme -y
-chroot chroot apt-get install cinnamon papirus-icon-theme orchis-gtk-theme -y
 
+#Firmwares
+chroot chroot apt-get install firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-amd-graphics firmware-realtek bluez-firmware -y
+    
+#Init and Window System
+chroot chroot apt-get install xorg xinit lightdm -y
+
+#Desktop apps
+chroot chroot apt-get install gedit eog gnome-screenshot gnome-clocks gnome-terminal gnome-system-monitor gnome-calculator gnome-weather gnome-calendar network-manager-gnome -y
+chroot chroot apt-get install cinnamon synaptic p7zip-full ffmpeg gvfs-backends wget xdg-user-dirs file-roller papirus-icon-theme orchis-gtk-theme -y
+
+#Pardus apps
+chroot chroot apt-get install pardus-lightdm-greeter pardus-installer pardus-software pardus-package-installer pardus-night-light pardus-about pardus-update pardus-locales pardus-ayyildiz-grub-theme -y
+
+#Grub update
 chroot chroot update-grub
 chroot chroot apt-get upgrade -y
 
