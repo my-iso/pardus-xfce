@@ -34,7 +34,7 @@ chroot chroot apt-get install -y firmware-amd-graphics firmware-linux-free \
     
 # xorg & desktop pkgs
 chroot chroot apt-get install xserver-xorg xinit lightdm gedit gnome-terminal eog network-manager-gnome synaptic p7zip-full gvfs-backends xdg-user-dirs -y
-chroot chroot apt-get install pardus-lightdm-greeter pardus-installer pardus-software pardus-about pardus-locales pardus-ayyildiz-grub-theme -y
+chroot chroot apt-get install pardus-lightdm-greeter pardus-installer pardus-software pardus-package-installer pardus-night-light pardus-about pardus-update pardus-locales pardus-ayyildiz-grub-theme -y
 chroot chroot apt-get install cinnamon -y
 
 
@@ -69,4 +69,4 @@ echo '    linux /live/vmlinuz boot=live components --' >> pardus/boot/grub/grub.
 echo '    initrd /live/initrd.img' >> pardus/boot/grub/grub.cfg
 echo '}' >> pardus/boot/grub/grub.cfg
 
-grub-mkrescue pardus -o pardus-gnulinux-$(date +%s).iso
+grub-mkrescue pardus -o pardus-cinnamon-backports.iso
