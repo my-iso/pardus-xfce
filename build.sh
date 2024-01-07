@@ -47,7 +47,6 @@ chroot chroot apt-get install pardus-lightdm-greeter pardus-installer pardus-sof
 chroot chroot update-grub
 chroot chroot apt-get upgrade -y
 
-
 #### Remove bloat files after dpkg invoke (optional)
 cat > chroot/etc/apt/apt.conf.d/02antibloat << EOF
 DPkg::Post-Invoke {"rm -rf /usr/share/man || true";};
