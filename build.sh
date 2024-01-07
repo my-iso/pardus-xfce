@@ -9,7 +9,7 @@ for i in dev dev/pts proc sys; do mount -o bind /$i chroot/$i; done
 cat > chroot/etc/apt/sources.list.d/pardus.list << EOF
 deb http://depo.pardus.org.tr/pardus yirmiuc main contrib non-free non-free-firmware
 deb http://depo.pardus.org.tr/pardus yirmiuc-deb main contrib non-free non-free-firmware
-deb http://depo.pardus.org.tr/guvenlik yirmiuc main contrib non-free non-free-firmware
+#deb http://depo.pardus.org.tr/guvenlik yirmiuc main contrib non-free non-free-firmware
 EOF
 
 
