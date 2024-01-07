@@ -35,7 +35,7 @@ chroot chroot apt-get install -y firmware-amd-graphics firmware-linux-free \
 # xorg & desktop pkgs
 chroot chroot apt-get install xserver-xorg xinit lightdm gedit gnome-terminal eog network-manager-gnome synaptic p7zip-full gvfs-backends xdg-user-dirs -y
 chroot chroot apt-get install pardus-lightdm-greeter pardus-installer pardus-software pardus-package-installer pardus-night-light pardus-about pardus-update pardus-locales pardus-ayyildiz-grub-theme -y
-chroot chroot apt-get install cinnamon -y
+chroot chroot apt-get install cinnamon papirus-icon-theme orchis-gtk-theme -y
 
 
 #### Remove bloat files after dpkg invoke (optional)
