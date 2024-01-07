@@ -12,6 +12,10 @@ deb http://depo.pardus.org.tr/pardus yirmiuc-deb main contrib non-free non-free-
 #deb http://depo.pardus.org.tr/guvenlik yirmiuc main contrib non-free non-free-firmware
 EOF
 
+cat > chroot/etc/apt/sources.list.d/yirmiuc-backports.list << EOF
+deb http://depo.pardus.org.tr/backports yirmiuc-backports main contrib non-free non-free-firmware
+EOF
+
 
 chroot chroot apt-get update --allow-insecure-repositories
 chroot chroot apt-get install pardus-archive-keyring --allow-unauthenticated -y
@@ -24,23 +28,21 @@ chroot chroot apt-get install live-config live-boot plymouth plymouth-themes -y
 echo -e "#!/bin/sh\nexit 101" > chroot/usr/sbin/policy-rc.d
 chmod +x chroot/usr/sbin/policy-rc.d
 
-chroot chroot apt-get install linux-image-amd64 -y
+chroot chroot apt-get install -t yirmiuc-backports linux-image-amd64 -y
 chroot chroot apt-get install -y firmware-amd-graphics firmware-linux-free \
     firmware-linux firmware-linux-nonfree firmware-misc-nonfree firmware-realtek \
     
 # xorg & desktop pkgs
-chroot chroot apt-get install xserver-xorg xinit lightdm gedit gnome-terminal network-manager-gnome synaptic p7zip-full gvfs-backends xdg-user-dirs -y
+chroot chroot apt-get install xserver-xorg xinit lightdm gedit gnome-terminal eog network-manager-gnome synaptic p7zip-full gvfs-backends xdg-user-dirs -y
 chroot chroot apt-get install pardus-lightdm-greeter pardus-installer pardus-software pardus-about pardus-locales pardus-ayyildiz-grub-theme -y
 chroot chroot apt-get install cinnamon -y
 
 
 #### Remove bloat files after dpkg invoke (optional)
 cat > chroot/etc/apt/apt.conf.d/02antibloat << EOF
-DPkg::Post-Invoke {"rm -rf /usr/share/locale || true";};
 DPkg::Post-Invoke {"rm -rf /usr/share/man || true";};
 DPkg::Post-Invoke {"rm -rf /usr/share/help || true";};
 DPkg::Post-Invoke {"rm -rf /usr/share/doc || true";};
-DPkg::Post-Invoke {"rm -rf /usr/share/info || true";};
 EOF
 
 chroot chroot apt-get clean
