@@ -6,7 +6,7 @@ ln -s sid /usr/share/debootstrap/scripts/yirmiuc-deb || true
 debootstrap  --no-check-gpg --arch=amd64 yirmiuc-deb chroot https://depo.pardus.org.tr/pardus
 for i in dev dev/pts proc sys; do mount -o bind /$i chroot/$i; done
 
-cat > chroot/etc/apt/sources.list.d/pardus.list << EOF
+cat > chroot/etc/apt/sources.list << EOF
 deb http://depo.pardus.org.tr/pardus yirmiuc main contrib non-free non-free-firmware
 deb http://depo.pardus.org.tr/pardus yirmiuc-deb main contrib non-free non-free-firmware
 #deb http://depo.pardus.org.tr/guvenlik yirmiuc main contrib non-free non-free-firmware
@@ -26,12 +26,11 @@ chmod +x chroot/usr/sbin/policy-rc.d
 
 chroot chroot apt-get install linux-image-amd64 -y
 chroot chroot apt-get install -y firmware-amd-graphics firmware-linux-free \
-    firmware-linux firmware-linux-nonfree firmware-misc-nonfree \
-    firmware-realtek \
+    firmware-linux firmware-linux-nonfree firmware-misc-nonfree firmware-realtek \
     
 # xorg & desktop pkgs
-chroot chroot apt-get install xserver-xorg xinit lightdm network-manager-gnome synaptic p7zip-full gvfs-backends xdg-user-dirs -y
-chroot chroot apt-get install pardus-lightdm-greeter pardus-installer pardus-software -y
+chroot chroot apt-get install xserver-xorg xinit lightdm gedit gnome-terminal network-manager-gnome synaptic p7zip-full gvfs-backends xdg-user-dirs -y
+chroot chroot apt-get install pardus-lightdm-greeter pardus-installer pardus-software pardus-about pardus-locales pardus-ayyildiz-grub-theme -y
 chroot chroot apt-get install cinnamon -y
 
 
