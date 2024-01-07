@@ -17,17 +17,21 @@ chroot chroot apt-get update --allow-insecure-repositories
 chroot chroot apt-get install pardus-archive-keyring --allow-unauthenticated -y
 
 chroot chroot apt-get update -y
-chroot chroot apt-get install gnupg -y
 
-chroot chroot apt-get install grub-pc-bin grub-efi-ia32-bin grub-efi -y
+chroot chroot apt-get install gnupg grub-pc-bin grub-efi-ia32-bin grub-efi -y
 chroot chroot apt-get install live-config live-boot plymouth plymouth-themes -y
 
 echo -e "#!/bin/sh\nexit 101" > chroot/usr/sbin/policy-rc.d
 chmod +x chroot/usr/sbin/policy-rc.d
 
+chroot chroot apt-get install linux-image-amd64 -y
+chroot chroot apt-get install -y firmware-amd-graphics firmware-linux-free \
+    firmware-linux firmware-linux-nonfree firmware-misc-nonfree \
+    firmware-realtek \
+    
 # xorg & desktop pkgs
-chroot chroot apt-get install lsb-release pavucontrol xserver-xorg pipewire xinit lightdm pardus-lightdm-greeter network-manager-gnome -y
-chroot chroot apt-get install pardus-installer -y
+chroot chroot apt-get install xserver-xorg xinit lightdm network-manager-gnome synaptic p7zip-full gvfs-backends xdg-user-dirs -y
+chroot chroot apt-get install pardus-lightdm-greeter pardus-installer pardus-software -y
 chroot chroot apt-get install cinnamon -y
 
 
@@ -39,17 +43,6 @@ DPkg::Post-Invoke {"rm -rf /usr/share/help || true";};
 DPkg::Post-Invoke {"rm -rf /usr/share/doc || true";};
 DPkg::Post-Invoke {"rm -rf /usr/share/info || true";};
 EOF
-
-chroot chroot apt-get update -y
-chroot chroot apt-get install linux-image-amd64 -y
-chroot chroot apt-get install -y firmware-amd-graphics firmware-atheros \
-    firmware-b43-installer firmware-b43legacy-installer \
-    firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-linux-free \
-    firmware-cavium firmware-intel-sound firmware-intelwimax \
-    firmware-iwlwifi  firmware-libertas firmware-linux \
-    firmware-linux-nonfree firmware-misc-nonfree firmware-myricom \
-    firmware-netxen firmware-qlogic firmware-realtek firmware-samsung \
-    firmware-siano firmware-ti-connectivity firmware-zd1211
 
 chroot chroot apt-get clean
 rm -f chroot/root/.bash_history
