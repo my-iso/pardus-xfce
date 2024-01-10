@@ -79,7 +79,7 @@ cp -pf chroot/boot/vmlinuz-* pardus/live/vmlinuz
 
 mkdir -p pardus/boot/grub/
 echo 'terminal_output console' > pardus/boot/grub/grub.cfg
-echo 'menuentry "Start Pardus GNU/Linux Cinnamon (Unofficial)" --class pardus {' >> pardus/boot/grub/grub.cfg
+echo 'menuentry "Start Pardus GNU/Linux (Unofficial)" --class pardus {' >> pardus/boot/grub/grub.cfg
 echo '    linux /live/vmlinuz boot=live components --' >> pardus/boot/grub/grub.cfg
 echo '    initrd /live/initrd.img' >> pardus/boot/grub/grub.cfg
 echo '}' >> pardus/boot/grub/grub.cfg
