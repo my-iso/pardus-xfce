@@ -1,2 +1,9 @@
 Pardus 23 Backports Cinnamon Unofficial
-07/01/2024
+
+```
+sudo apt update
+sudo apt install curl mtools squashfs-tools grub-pc-bin grub-efi xorriso debootstrap -y
+sudo bash build.sh
+```
+
+Günceleme: 10/01/2024
