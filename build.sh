@@ -50,8 +50,8 @@ chroot chroot apt-get install cinnamon synaptic p7zip-full ffmpeg gvfs-backends 
 chroot chroot apt-get install pardus-lightdm-greeter pardus-installer pardus-software pardus-package-installer pardus-night-light pardus-about pardus-update pardus-locales pardus-ayyildiz-grub-theme -y
 
 #Grub update
-chroot chroot update-grub
 chroot chroot apt-get upgrade -y
+chroot chroot update-grub
 
 #### Remove bloat files after dpkg invoke (optional)
 cat > chroot/etc/apt/apt.conf.d/02antibloat << EOF
