@@ -9,7 +9,7 @@ for i in dev dev/pts proc sys; do mount -o bind /$i chroot/$i; done
 cat > chroot/etc/apt/sources.list << EOF
 deb http://depo.pardus.org.tr/pardus yirmiuc main contrib non-free non-free-firmware
 deb http://depo.pardus.org.tr/pardus yirmiuc-deb main contrib non-free non-free-firmware
-deb http://depo.pardus.org.tr/guvenlik yirmiuc-deb main contrib non-free non-free-firmware
+#deb http://depo.pardus.org.tr/guvenlik yirmiuc main contrib non-free non-free-firmware
 EOF
 
 cat > chroot/etc/apt/sources.list.d/yirmiuc-backports.list << EOF
@@ -43,8 +43,12 @@ chroot chroot apt-get install -y firmware-amd-graphics firmware-atheros \
 chroot chroot apt-get install xorg xinit lightdm -y
 
 #Desktop apps
-chroot chroot apt-get install gedit eog gnome-screenshot gnome-clocks gnome-terminal gnome-system-monitor gnome-calculator gnome-weather gnome-calendar network-manager-gnome -y
-chroot chroot apt-get install cinnamon synaptic p7zip-full ffmpeg gvfs-backends wget xdg-user-dirs file-roller papirus-icon-theme orchis-gtk-theme -y
+chroot chroot apt-get install xfce4 xfce4-terminal file-roller -y
+chroot chroot apt-get install xfce4-whiskermenu-plugin thunar-archive-plugin xfce4-screenshooter mousepad ristretto -y
+chroot chroot apt-get install xfce4-datetime-plugin xfce4-timer-plugin xfce4-mount-plugin xfce4-taskmanager xfce4-battery-plugin xfce4-power-manager -y
+chroot chroot apt-get install network-manager-gnome gvfs-backends gnome-calculator synaptic -y
+chroot chroot apt-get install pardus-about pardus-installer pardus-lightdm-greeter pardus-night-light pardus-package-installer pardus-software pardus-update -y
+chroot chroot apt-get install pardus-xfce-gtk-theme pardus-xfce-icon-theme pardus-xfce-settings pardus-xfce-tweaks -y
 
 #Pardus apps
 chroot chroot apt-get install pardus-lightdm-greeter pardus-installer pardus-software pardus-package-installer pardus-night-light pardus-about pardus-update pardus-locales pardus-ayyildiz-grub-theme -y
@@ -52,6 +56,7 @@ chroot chroot apt-get install pardus-lightdm-greeter pardus-installer pardus-sof
 #Grub update
 chroot chroot apt-get upgrade -y
 chroot chroot update-grub
+chroot chroot apt remove xterm termit xarchiver -y
 
 #### Remove bloat files after dpkg invoke (optional)
 cat > chroot/etc/apt/apt.conf.d/02antibloat << EOF
@@ -79,9 +84,9 @@ cp -pf chroot/boot/vmlinuz-* pardus/live/vmlinuz
 
 mkdir -p pardus/boot/grub/
 echo 'terminal_output console' > pardus/boot/grub/grub.cfg
-echo 'menuentry "Start Pardus GNU/Linux (Unofficial)" --class pardus {' >> pardus/boot/grub/grub.cfg
+echo 'menuentry "Start Pardus 23 Xfce Backports (Unofficial)" --class pardus {' >> pardus/boot/grub/grub.cfg
 echo '    linux /live/vmlinuz boot=live components --' >> pardus/boot/grub/grub.cfg
 echo '    initrd /live/initrd.img' >> pardus/boot/grub/grub.cfg
 echo '}' >> pardus/boot/grub/grub.cfg
 
-grub-mkrescue pardus -o pardus-cinnamon-backports.iso
+grub-mkrescue pardus -o pardus-xfce-backports.iso
