@@ -33,8 +33,6 @@ chmod +x chroot/usr/sbin/policy-rc.d
 chroot chroot apt-get install -t yirmiuc-backports linux-image-amd64 -y
 
 #Firmwares
-
-
 chroot chroot apt-get install -y firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-amd-graphics firmware-realtek bluez-firmware \
 firmware-intel-sound firmware-iwlwifi firmware-atheros firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 \
 firmware-cavium firmware-libertas firmware-myricom firmware-netxen firmware-qlogic firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211
