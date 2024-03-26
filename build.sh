@@ -1,4 +1,7 @@
 #!/usr/bin/sh
+apt update
+apt install curl debootstrap xorriso squashfs-tools mtools grub-pc-bin grub-efi -y
+
 set -ex
 mkdir chroot || true
 export DEBIAN_FRONTEND=noninteractive
@@ -30,28 +33,26 @@ chmod +x chroot/usr/sbin/policy-rc.d
 chroot chroot apt-get install -t yirmiuc-backports linux-image-amd64 -y
 
 #Firmwares
-chroot chroot apt-get install -y firmware-amd-graphics firmware-atheros \
-    firmware-b43-installer firmware-b43legacy-installer \
-    firmware-bnx2 firmware-bnx2x firmware-brcm80211 firmware-linux-free \
-    firmware-cavium firmware-intel-sound \
-    firmware-iwlwifi  firmware-libertas firmware-linux \
-    firmware-linux-nonfree firmware-misc-nonfree firmware-myricom \
-    firmware-netxen firmware-qlogic firmware-realtek firmware-samsung \
-    firmware-siano firmware-ti-connectivity firmware-zd1211
+
+
+chroot chroot apt-get install -y firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-amd-graphics firmware-realtek bluez-firmware \
+firmware-intel-sound firmware-iwlwifi firmware-atheros firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x firmware-brcm80211 \
+firmware-cavium firmware-libertas firmware-myricom firmware-netxen firmware-qlogic firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211
     
 #Init and Window System
 chroot chroot apt-get install xorg xinit lightdm -y
 
 #Desktop apps
-chroot chroot apt-get install xfce4 xfce4-terminal file-roller -y
-chroot chroot apt-get install xfce4-whiskermenu-plugin thunar-archive-plugin xfce4-screenshooter mousepad ristretto -y
-chroot chroot apt-get install xfce4-datetime-plugin xfce4-timer-plugin xfce4-mount-plugin xfce4-taskmanager xfce4-battery-plugin xfce4-power-manager -y
-chroot chroot apt-get install network-manager-gnome gvfs-backends gnome-calculator synaptic -y
-chroot chroot apt-get install pardus-about pardus-installer pardus-lightdm-greeter pardus-night-light pardus-package-installer pardus-software pardus-update -y
-chroot chroot apt-get install pardus-xfce-gtk-theme pardus-xfce-icon-theme pardus-xfce-settings pardus-xfce-tweaks -y
+chroot chroot apt-get install -y xfce4 xfce4-terminal xfce4-whiskermenu-plugin \
+xfce4-screenshooter xfce4-datetime-plugin xfce4-timer-plugin xfce4-mount-plugin \
+xfce4-taskmanager xfce4-battery-plugin xfce4-power-manager file-roller thunar-archive-plugin \
+mousepad ristretto network-manager-gnome gvfs-backends gnome-calculator synaptic inxi
 
 #Pardus apps
-chroot chroot apt-get install pardus-lightdm-greeter pardus-installer pardus-software pardus-package-installer pardus-night-light pardus-about pardus-update pardus-locales pardus-ayyildiz-grub-theme -y
+chroot chroot apt-get install -y pardus-xfce-gtk-theme pardus-xfce-icon-theme pardus-xfce-settings pardus-xfce-tweaks \
+pardus-lightdm-greeter pardus-installer pardus-software pardus-package-installer \
+pardus-night-light pardus-about pardus-update pardus-locales pardus-ayyildiz-grub-theme
+
 
 #Grub update
 chroot chroot apt-get upgrade -y
@@ -89,4 +90,4 @@ echo '    linux /live/vmlinuz boot=live components --' >> pardus/boot/grub/grub.
 echo '    initrd /live/initrd.img' >> pardus/boot/grub/grub.cfg
 echo '}' >> pardus/boot/grub/grub.cfg
 
-grub-mkrescue pardus -o pardus-xfce-backports.iso
+grub-mkrescue pardus -o pardus-23-xfce-backports.iso
