@@ -51,6 +51,9 @@ chroot chroot apt-get install -y pardus-xfce-gtk-theme pardus-xfce-icon-theme pa
 pardus-lightdm-greeter pardus-installer pardus-software pardus-package-installer \
 pardus-night-light pardus-about pardus-update pardus-locales pardus-ayyildiz-grub-theme
 
+#Printer and bluetooth apps
+chroot chroot apt-get install printer-driver-all system-config-printer simple-scan blueman -y
+
 
 #Grub update
 chroot chroot apt-get upgrade -y
