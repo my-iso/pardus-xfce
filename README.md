@@ -6,4 +6,4 @@ Kurulum sonrası:
 sudo apt update && sudo apt upgrade && sudo update-grub
 ```
 
-Günceleme: 26/03/2024
+Günceleme: 27/03/2024
