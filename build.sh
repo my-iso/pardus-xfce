@@ -27,7 +27,7 @@ chroot chroot apt update -y
 chroot chroot apt install gnupg grub-pc-bin grub-efi-ia32-bin grub-efi live-config live-boot plymouth plymouth-themes -y
 
 #Kernel
-chroot chroot apt install -t yirmiuc-backports linux-image-amd64 -y
+chroot chroot apt install -t yirmiuc-backports linux-image-amd64 linux-headers-amd64 -y
 
 echo -e "#!/bin/sh\nexit 101" > chroot/usr/sbin/policy-rc.d
 chmod +x chroot/usr/sbin/policy-rc.d
