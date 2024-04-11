@@ -26,11 +26,11 @@ chroot chroot apt update -y
 
 chroot chroot apt install gnupg grub-pc-bin grub-efi-ia32-bin grub-efi live-config live-boot plymouth plymouth-themes -y
 
-echo -e "#!/bin/sh\nexit 101" > chroot/usr/sbin/policy-rc.d
-chmod +x chroot/usr/sbin/policy-rc.d
-
 #Kernel
 chroot chroot apt install -t yirmiuc-backports linux-image-amd64 -y
+
+echo -e "#!/bin/sh\nexit 101" > chroot/usr/sbin/policy-rc.d
+chmod +x chroot/usr/sbin/policy-rc.d
 
 #Firmwares
 chroot chroot apt install -y firmware-linux firmware-linux-free firmware-linux-nonfree firmware-misc-nonfree firmware-amd-graphics firmware-realtek bluez-firmware \
@@ -44,7 +44,7 @@ chroot chroot apt install xorg xinit lightdm -y
 chroot chroot apt install -y xfce4 xfce4-terminal xfce4-whiskermenu-plugin mugshot \
 xfce4-screenshooter xfce4-datetime-plugin xfce4-timer-plugin xfce4-mount-plugin \
 xfce4-taskmanager xfce4-battery-plugin xfce4-power-manager file-roller thunar-archive-plugin \
-mousepad ristretto network-manager-gnome gvfs-backends gnome-calculator synaptic inxi
+mousepad ristretto network-manager-gnome gnome-disk-utility gvfs-backends gnome-calculator synaptic inxi
 
 #Pardus apps
 chroot chroot apt install -y pardus-xfce-gtk-theme pardus-xfce-icon-theme pardus-xfce-settings pardus-xfce-tweaks \
