@@ -41,7 +41,7 @@ firmware-cavium firmware-libertas firmware-myricom firmware-netxen firmware-qlog
 chroot chroot apt install xorg xinit lightdm -y
 
 #Desktop apps
-chroot chroot apt install -y xfce4 xfce4-terminal xfce4-whiskermenu-plugin \
+chroot chroot apt install -y xfce4 xfce4-terminal xfce4-whiskermenu-plugin mugshot \
 xfce4-screenshooter xfce4-datetime-plugin xfce4-timer-plugin xfce4-mount-plugin \
 xfce4-taskmanager xfce4-battery-plugin xfce4-power-manager file-roller thunar-archive-plugin \
 mousepad ristretto network-manager-gnome gvfs-backends gnome-calculator synaptic inxi
