@@ -44,7 +44,7 @@ chroot chroot apt install xorg xinit lightdm -y
 chroot chroot apt install -y xfce4 xfce4-terminal xfce4-whiskermenu-plugin mugshot \
 xfce4-screenshooter xfce4-datetime-plugin xfce4-timer-plugin xfce4-mount-plugin \
 xfce4-taskmanager xfce4-battery-plugin xfce4-power-manager file-roller thunar-archive-plugin \
-mousepad ristretto network-manager-gnome gnome-disk-utility gvfs-backends gnome-calculator synaptic inxi
+mousepad ristretto network-manager-gnome gnome-disk-utility gvfs-backends gnome-calculator synaptic inxi wget
 
 #Pardus apps
 chroot chroot apt install -y pardus-xfce-gtk-theme pardus-xfce-icon-theme pardus-xfce-settings pardus-xfce-tweaks \
