@@ -7,4 +7,4 @@ Kurulum sonrası aşağıdaki komutu terminale mutlaka giriniz!
 sudo apt update && sudo apt upgrade && sudo update-grub
 ```
 
-Güncelleme: 11/04/2024
+Güncelleme: Nisan 2024
