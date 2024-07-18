@@ -1,4 +1,4 @@
-Pardus 23.1 Backports Xfce Unofficial 
+Pardus 23 Backports Xfce Unofficial 
 
 Kurulum sonrası aşağıdaki komutu terminale mutlaka giriniz!
 
